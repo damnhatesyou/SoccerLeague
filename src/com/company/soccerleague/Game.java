@@ -1,6 +1,6 @@
 package com.company.soccerleague;
 
-class Game {
+public class Game {
     private Team teamAName;
     private Team teamBName;
     private int teamAScore;

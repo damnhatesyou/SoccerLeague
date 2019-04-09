@@ -39,7 +39,7 @@ public class Schedule {
     }
 
     private void createMatch() {
-        while (usedTeams.size() == teams.size()) {
+        while (!(usedTeams.size() == teams.size())) {
             Random gen = new Random();
             int temp = gen.nextInt(4);
             if (!usedTeams.contains(temp)) {
