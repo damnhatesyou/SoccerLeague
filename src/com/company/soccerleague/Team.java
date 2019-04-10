@@ -18,10 +18,6 @@ public class Team {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public int getTotalGoalsAllowed() {
         return totalGoalsAllowed;
     }
@@ -60,5 +56,13 @@ public class Team {
 
     public int getTieTotal() {
         return tieTotal;
+    }
+
+    public void printStats(){
+        System.out.println(getName());
+        System.out.println("Won " + getWinTotal());
+        System.out.println("Loss " + getLossTotal());
+        System.out.println("Tie " + getTieTotal());
+        System.out.println("Goals Scored " + getTotalGoalsScored());
     }
 }

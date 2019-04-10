@@ -5,46 +5,53 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Schedule {
-    String[] Match1;
-    String[] Match2;
-    private ArrayList<Team> teams = new ArrayList<Team>();
-    private ArrayList<Game> match;
     private ArrayList<Integer> usedTeams = new ArrayList<Integer>();
+    private Team[] teams = {new Team("Cockburn Sounders"),new Team("Melville Hawks"),
+            new Team("Canning Cavaliers"),new Team("Armadale Pioneers")};
 
     public Schedule() {
         Scanner myScanner = new Scanner(System.in);
-        int temperature;
+        Game games = new Game();
 
-        teams.add(new Team("Cockburn Sounders"));
-        teams.add(new Team("Melville Hawks"));
-        teams.add(new Team("Canning Cavaliers"));
-        teams.add(new Team("Armadale Pioneers"));
+        int freezingCount = 0;
+        while (freezingCount != 3){
+            System.out.println("What is the Temperature:");
+            double temperature = myScanner.nextDouble();
 
-        System.out.println("What is the Temperature:");
-        temperature = myScanner.nextInt();
-
-
-        if (temperature >= 30) {
-            if (temperature <= 104) {
-                createMatch();
-                for (Integer i : usedTeams) {
-                    System.out.println(i);
+            if (temperature >= 32.0) {
+                if (temperature <= 104.0) {
+                    createMatch();
+                    games.playGame(teams[usedTeams.get(0)], teams[usedTeams.get(1)], temperature);
+                    games.playGame(teams[usedTeams.get(2)], teams[usedTeams.get(3)], temperature);
+                } else {
+                    System.out.println("Too Hot to play");
                 }
+                freezingCount = 0;
             } else {
-                System.out.println("Too Hot to play");
+                System.out.println("Too cold to play");
+                freezingCount++;
             }
-        } else {
-            System.out.println("Too cold to play");
         }
+        for (Team team:
+             teams) {
+            team.printStats();
+        }
+
+        games.printGames();
+
     }
 
     private void createMatch() {
-        while (!(usedTeams.size() == teams.size())) {
+        usedTeams.clear();
+        while (!(teams.length == usedTeams.size())) {
             Random gen = new Random();
             int temp = gen.nextInt(4);
             if (!usedTeams.contains(temp)) {
                 usedTeams.add(temp);
             }
+        }
+        for (Integer team : usedTeams) {
+            System.out.println(team);
         }
     }
 }
