@@ -23,19 +23,19 @@ public class Schedule {
         System.out.println("What is the Temperature:");
         temperature = myScanner.nextInt();
 
-
         if (temperature >= 30) {
             if (temperature <= 104) {
                 createMatch();
-                for (Integer i : usedTeams) {
+                for (int i : usedTeams) {
                     System.out.println(i);
                 }
             } else {
-                System.out.println("Too Hot to play");
+                System.out.println("Too Hot to Play");
             }
         } else {
             System.out.println("Too cold to play");
         }
+        myScanner.close();
     }
 
     private void createMatch() {
