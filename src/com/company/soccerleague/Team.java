@@ -1,3 +1,7 @@
+// Damien Bafile
+// m036449@tafe.wa.edu.au
+/////////////////////////
+// Java II - Soccer League
 package com.company.soccerleague;
 
 public class Team {
@@ -11,23 +15,22 @@ public class Team {
 
     public Team(String name) {
         this.name = name;
-
     }
 
     public String getName() {
-        return name;
+        return  this.name;
     }
 
     public int getTotalGoalsAllowed() {
-        return totalGoalsAllowed;
+        return  this.totalGoalsAllowed;
     }
 
-    public void setTotalGoalsAllowed(int totalGoalsAllowed) {
-        this.totalGoalsAllowed = totalGoalsAllowed;
+    public void addTotalGoalsAllowed(int totalGoalsAllowed) {
+        this.totalGoalsAllowed += totalGoalsAllowed;
     }
 
     public int getTotalGoalsScored() {
-        return totalGoalsScored;
+        return  this.totalGoalsScored;
     }
 
     public void addToTotalGoalsScored(int totalGoalsScored) {
@@ -35,34 +38,32 @@ public class Team {
     }
 
     public void addWin() {
-        winTotal++;
+        this.winTotal++;
     }
 
     public int getWinTotal() {
-        return winTotal;
+        return  this.winTotal;
     }
 
     public void addLoss() {
-        lossTotal++;
+        this.lossTotal++;
     }
 
     public int getLossTotal() {
-        return lossTotal;
+        return  this.lossTotal;
     }
 
     public void addTie() {
-        tieTotal++;
+        this.tieTotal++;
     }
 
     public int getTieTotal() {
-        return tieTotal;
+        return  this.tieTotal;
     }
 
     public void printStats(){
         System.out.println(getName());
-        System.out.println("Won " + getWinTotal());
-        System.out.println("Loss " + getLossTotal());
-        System.out.println("Tie " + getTieTotal());
-        System.out.println("Goals Scored " + getTotalGoalsScored());
+        System.out.println("Won " + getWinTotal() + ", Loss " + getLossTotal() + ", Tie " + getTieTotal());
+        System.out.println("Goals Scored " + getTotalGoalsScored() + " Goals Allowed " + getTotalGoalsAllowed());
     }
 }

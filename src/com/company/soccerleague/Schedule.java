@@ -1,46 +1,31 @@
+// Damien Bafile
+// m036449@tafe.wa.edu.au
+/////////////////////////
+// Java II - Soccer League
 package com.company.soccerleague;
 
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.Scanner;
 
 public class Schedule {
-    private ArrayList<Integer> usedTeams = new ArrayList<Integer>();
-    private Team[] teams = { new Team("Cockburn Sounders"), new Team("Melville Hawks"), new Team("Canning Cavaliers"),
-            new Team("Armadale Pioneers") };
+    private int totalTemps = 0;
+    private int hottestTemp = 0;
+    private ArrayList<Integer> usedTeams = new ArrayList<>();
+    Game games = new Game();
 
-    public Schedule() {
-        Scanner myScanner = new Scanner(System.in);
-        Game games = new Game();
 
-        int freezingCount = 0;
-        while (freezingCount != 3) {
-            System.out.println("What is the Temperature:");
-            double temperature = myScanner.nextDouble();
+    public void scheduleGame(Team[] teams, int temperature) {
 
-            if (temperature >= 32.0) {
-                if (temperature <= 104.0) {
-                    createMatch();
-                    games.playGame(teams[usedTeams.get(0)], teams[usedTeams.get(1)], temperature);
-                    games.playGame(teams[usedTeams.get(2)], teams[usedTeams.get(3)], temperature);
-                } else {
-                    System.out.println("Too Hot to play");
-                }
-                freezingCount = 0;
-            } else {
-                System.out.println("Too cold to play");
-                freezingCount++;
-            }
-        }
-        for (Team team : teams) {
-            team.printStats();
-        }
-
-        games.printGames();
-
+        if (temperature > hottestTemp)
+            hottestTemp = temperature;
+        totalTemps += temperature;
+        createMatch(teams);
+        games = new Game(teams[usedTeams.get(0)], teams[usedTeams.get(1)], temperature);
+        games.playGame();
+        games = new Game(teams[usedTeams.get(2)], teams[usedTeams.get(3)], temperature);
+        games.playGame();
     }
-
-    private void createMatch() {
+    private void createMatch(Team[] teams){
         usedTeams.clear();
         while (!(teams.length == usedTeams.size())) {
             Random gen = new Random();
@@ -49,8 +34,19 @@ public class Schedule {
                 usedTeams.add(temp);
             }
         }
-        for (Integer team : usedTeams) {
-            System.out.println(team);
-        }
     }
+
+    public void printGames() {
+
+        if (Game.numberOfGame() != 0){
+            Game.printGames();
+            System.out.println("Hottest Temperature: " + hottestTemp);
+            System.out.printf("Average Temperature: %.2f" , ((double)totalTemps / (Game.numberOfGame()/2)));
+        } else {
+            System.out.println("No games played this season");
+        }
+
+    }
+
 }
+
